@@ -1,0 +1,26 @@
+.progress-bar__bar {
+  width: 100%;
+  animation: progressBar 20s linear;
+}
+
+.progress-bar--complete .progress-bar__bar {
+  animation-play-state: paused;
+}
+
+@keyframes progressBar {
+  0% {
+    width: 0%;
+  }
+  10% {
+    width: 80%;
+  }
+  20% {
+    width: 90%;
+  }
+  30% {
+    width: 95%;
+  }
+  100% {
+    width: 100%;
+  }
+}

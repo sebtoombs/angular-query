@@ -1,0 +1,46 @@
+<a [routerLink]="['/']" class="text-blue-600 hover:underline text-sm"
+  >&lt; Back to list</a
+>
+
+<div>
+  <ng-container *ngIf="query?.status === 'success' && query.isFetching">
+    <app-progress-bar [isLoading]="true"></app-progress-bar>
+  </ng-container>
+
+  <ng-container *ngIf="query?.status === 'loading'">
+    <div class="flex items-center justify-center mt-4">
+      <app-spinner></app-spinner>
+      Hard Loading (fresh from server)
+    </div>
+  </ng-container>
+  <ng-container *ngIf="query?.status === 'success'">
+    <div class="bg-white rounded-md shadow-lg px-6 py-4 mt-4">
+      <div class="flex items-center justify-between">
+        <div class="flex-1 mr-4">
+          <h3 class="text-lg leading-6 font-medium text-gray-900">
+            {{ query?.data?.name | titlecase }}
+          </h3>
+          <p class="mt-2 text-base leading-6 text-gray-500">
+            id: {{ query?.data?.id }}
+          </p>
+        </div>
+        <div class="flex-shrink-0">
+          <span class="block w-12 h-12 rounded-full bg-gray-300">
+            <img [src]="query?.data?.sprites?.front_default" alt="" />
+          </span>
+        </div>
+      </div>
+      <p class="text-gray-500 text-sm">
+        {{ query?.isFetching ? "(from cache, refetching in background)" : "" }}
+      </p>
+      <div class="flex justify-center mt-3">
+        <button
+          class="bg-blue-500 text-white rounded-md font-medium px-4 py-2"
+          (click)="handleRefetch()"
+        >
+          Refetch
+        </button>
+      </div>
+    </div>
+  </ng-container>
+</div>

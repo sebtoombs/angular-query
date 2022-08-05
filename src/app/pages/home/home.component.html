@@ -1,0 +1,38 @@
+<div>
+  <ng-container *ngIf="status === 'success' && isFetching">
+    <app-progress-bar [isLoading]="true"></app-progress-bar>
+  </ng-container>
+
+  <ng-container *ngIf="status === 'loading'">
+    <div class="flex items-center justify-center mt-4">
+      <app-spinner></app-spinner>
+      Hard Loading (fresh from server)
+    </div>
+  </ng-container>
+  <ng-container *ngIf="status === 'success'">
+    <div class="bg-white rounded-md shadow-lg flex flex-col overflow-hidden">
+      <div
+        *ngFor="let pokemon of pokemonList"
+        class="px-6 py-4 cursor-pointer hover:bg-gray-50"
+        role="button"
+        (click)="onPokemonClick(pokemon)"
+      >
+        <div class="flex items-center justify-between">
+          <div class="flex-1 flex items-center mr-4">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">
+              <a [routerLink]="['/', pokemon.name]">{{
+                pokemon.name | titlecase
+              }}</a>
+            </h3>
+            <p class="mt-2 text-base leading-6 text-gray-500">
+              {{ pokemon.description }}
+            </p>
+          </div>
+          <div class="flex-shrink-0">
+            <span class="block w-8 h-8 rounded-full bg-gray-300"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
